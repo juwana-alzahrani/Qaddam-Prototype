@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>قدّام | بوابة الطالب الذكية</title>
+<style>
+:root{
+  --bg:#f6f7fb;--card:#fff;--ink:#172033;--muted:#6f7890;--line:#e7e9f0;
+  --primary:#5b4cf0;--primary2:#7b6cff;--soft:#efedff;--green:#1da875;
+  --amber:#e8a321;--red:#e25555;--shadow:0 18px 45px rgba(28,35,65,.10);
+}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit} button{cursor:pointer;border:0}
+.app{display:flex;min-height:100vh}.sidebar{width:250px;background:#15182a;color:white;padding:24px 16px;position:fixed;right:0;top:0;bottom:0;z-index:5}
+.brand{font-size:30px;font-weight:900;letter-spacing:-1px;padding:6px 12px 28px}.brand small{display:block;font-size:11px;font-weight:500;color:#aeb4ca;margin-top:3px}
+.nav{display:grid;gap:7px}.nav button{background:transparent;color:#c8ccdc;text-align:right;padding:13px 14px;border-radius:13px;font-weight:700}.nav button:hover,.nav button.active{background:#292d47;color:#fff}.nav .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary2);margin-left:9px}
+.sideBottom{position:absolute;bottom:22px;right:16px;left:16px;background:#20243a;border:1px solid #303550;padding:14px;border-radius:15px;font-size:12px;color:#b9bed0}
+.main{margin-right:250px;width:calc(100% - 250px);padding:28px 34px 45px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.hello h1{margin:0;font-size:27px}.hello p{margin:5px 0 0;color:var(--muted)}.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#6c5cf3,#9c91ff);color:#fff;display:grid;place-items:center;font-weight:900}
+.view{display:none}.view.active{display:block}.grid{display:grid;gap:16px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1.25fr .75fr}.card{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:20px;box-shadow:0 5px 20px rgba(20,25,50,.03)}
+.stat{position:relative;overflow:hidden}.stat .label{color:var(--muted);font-size:13px;font-weight:700}.stat .num{font-size:30px;font-weight:900;margin-top:7px}.pill{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:800}.purple{background:var(--soft);color:var(--primary)}.green{background:#e8f8f1;color:#16845d}.amber{background:#fff5dd;color:#a66d08}.red{background:#ffebeb;color:#bd4141}
+.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:26px 0 12px}.sectionTitle h2{font-size:18px;margin:0}.sectionTitle span{color:var(--muted);font-size:12px}
+.progress{height:9px;background:#eef0f5;border-radius:10px;overflow:hidden;margin-top:13px}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),#8d81ff);border-radius:10px}
+.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.check{width:22px;height:22px;border:2px solid #cfd3df;border-radius:7px;background:#fff}.task.done .check{background:var(--green);border-color:var(--green);position:relative}.task.done .check:after{content:"✓";color:white;position:absolute;font-size:13px;left:3px;top:-1px}.task .txt{flex:1}.task small{color:var(--muted);display:block;margin-top:3px}
+.btn{padding:11px 15px;border-radius:12px;font-weight:800}.primary{background:var(--primary);color:#fff}.secondary{background:var(--soft);color:var(--primary)}.ghost{background:#f3f4f8;color:#424a60}.full{width:100%}
+.hero{background:linear-gradient(135deg,#1b1e34,#353a67);color:#fff;padding:28px;border-radius:22px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(123,108,255,.20);left:-80px;top:-120px}.hero h2{margin:0;font-size:25px}.hero p{color:#cdd1df;max-width:600px;line-height:1.8}.hero .mini{display:flex;gap:8px;flex-wrap:wrap}.hero .mini span{background:rgba(255,255,255,.10);padding:7px 10px;border-radius:999px;font-size:11px}
+.op{display:flex;flex-direction:column;gap:12px}.opHead{display:flex;justify-content:space-between;align-items:flex-start}.op h3{margin:0;font-size:16px}.op p{color:var(--muted);font-size:12px;line-height:1.6;margin:7px 0}.tag{background:#f3f4f8;padding:5px 8px;border-radius:7px;font-size:10px;font-weight:800;color:#5a6276}.fit{color:var(--green);font-weight:900;font-size:12px}
+.chat{height:520px;display:flex;flex-direction:column}.messages{flex:1;overflow:auto;padding:8px 2px}.bubble{max-width:78%;padding:12px 14px;border-radius:15px;margin:9px 0;line-height:1.7;font-size:13px}.bot{background:#f0efff;border-top-right-radius:4px}.me{background:#22263b;color:#fff;margin-right:auto;border-top-left-radius:4px}.chatbar{display:flex;gap:8px;border-top:1px solid var(--line);padding-top:14px}.chatbar input{flex:1;border:1px solid var(--line);border-radius:12px;padding:12px;outline:none}.typing{font-size:11px;color:var(--muted);display:none;margin:3px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.filter{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:10px;font-size:12px}.filter.active{background:var(--soft);border-color:#d8d3ff;color:var(--primary);font-weight:800}
+.profileRow{display:flex;gap:16px;align-items:center}.bigAvatar{width:74px;height:74px;border-radius:22px;background:linear-gradient(135deg,#5b4cf0,#9187ff);color:#fff;display:grid;place-items:center;font-size:27px;font-weight:900}.skill{display:inline-block;margin:5px 4px 0 0;padding:7px 10px;background:#f3f4f8;border-radius:9px;font-size:11px;font-weight:700}
+.timeline{position:relative;padding-right:25px}.timeline:before{content:"";position:absolute;right:8px;top:5px;bottom:5px;width:2px;background:#e4e6ef}.step{position:relative;margin:0 0 22px}.step:before{content:"";position:absolute;right:-21px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 5px var(--soft)}.step h4{margin:0 0 4px}.step p{margin:0;color:var(--muted);font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(10,12,25,.58);display:none;place-items:center;z-index:20;padding:20px}.modal.show{display:grid}.modalBox{background:#fff;border-radius:22px;max-width:560px;width:100%;padding:24px;box-shadow:var(--shadow)}.modalTop{display:flex;justify-content:space-between}.close{background:#f1f2f6;border-radius:10px;width:35px;height:35px}
+.toast{position:fixed;bottom:25px;left:25px;background:#171a2b;color:#fff;padding:13px 16px;border-radius:12px;display:none;z-index:30;font-size:12px}
+@media(max-width:900px){.sidebar{width:82px;padding:20px 10px}.brand{font-size:0;text-align:center}.brand:after{content:"ق";font-size:28px}.brand small,.nav button span:not(.dot),.sideBottom{display:none}.nav button{text-align:center}.main{margin-right:82px;width:calc(100% - 82px);padding:20px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:560px){.g4{grid-template-columns:1fr}.main{padding:15px}.hero h2{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">قدّام<small>خطوتك الجاية تبدأ هنا</small></div>
+  <div class="nav">
+    <button class="active" onclick="go('dashboard',this)">◉ <span>لوحتي</span></button>
+    <button onclick="go('study',this)">▣ <span>StudyFlow</span></button>
+    <button onclick="go('opps',this)">✦ <span>الفرص المناسبة</span></button>
+    <button onclick="go('mentor',this)">✧ <span>المستشار الذكي</span></button>
+    <button onclick="go('profile',this)">○ <span>ملفي</span></button>
+  </div>
+  <div class="sideBottom">نسخة تجريبية تفاعلية<br><b>Prototype • 01</b></div>
+</aside>
+
+<main class="main">
+<header class="top">
+  <div class="hello"><h1>هلا جُوانا 👋</h1><p>خلّينا نرتّب خطوتك الجاية.</p></div>
+  <div class="avatar">ج</div>
+</header>
+
+<section id="dashboard" class="view active">
+  <div class="hero">
+    <h2>قدّام يفهم وضعك… ويقول لك وش بعد.</h2>
+    <p>منصة ذكية تجمع رحلتك الأكاديمية والمهنية في مكان واحد، ثم تحوّل بياناتك إلى توصيات وخطوات عملية تناسبك.</p>
+    <div class="mini"><span>🎓 إدارة الدراسة</span><span>🚀 فرص مناسبة</span><span>🤖 إرشاد مهني</span><span>📊 متابعة التطور</span></div>
+  </div>
+  <div class="sectionTitle"><h2>نظرتك السريعة</h2><span>محدّث الآن</span></div>
+  <div class="grid g4">
+    <div class="card stat"><div class="label">التقدم الأكاديمي</div><div class="num">78%</div><span class="pill green">جيد جدًا</span><div class="progress"><i style="width:78%"></i></div></div>
+    <div class="card stat"><div class="label">الجاهزية المهنية</div><div class="num">64%</div><span class="pill purple">في تطور</span><div class="progress"><i style="width:64%"></i></div></div>
+    <div class="card stat"><div class="label">مهارات مكتسبة</div><div class="num">12</div><span class="pill amber">+3 هذا الشهر</span></div>
+    <div class="card stat"><div class="label">فرص مناسبة</div><div class="num">8</div><span class="pill green">3 جديدة</span></div>
+  </div>
+  <div class="grid g2">
+    <div>
+      <div class="sectionTitle"><h2>الأولوية اليوم</h2><span>3 مهام</span></div>
+      <div class="card">
+        <div class="task"><div class="check"></div><div class="txt"><b>تسليم مشروع قواعد البيانات</b><small>غدًا • أولوية عالية</small></div><span class="pill red">عاجل</span></div>
+        <div class="task"><div class="check"></div><div class="txt"><b>مراجعة 3 محاضرات</b><small>بعد يومين • ساعتان</small></div><span class="pill amber">متوسط</span></div>
+        <div class="task done"><div class="check"></div><div class="txt"><b>تحديث الملف المهني</b><small>تم الإنجاز</small></div><span class="pill green">مكتمل</span></div>
+        <button class="btn secondary full" onclick="go('study',document.querySelectorAll('.nav button')[1])">فتح StudyFlow</button>
+      </div>
+    </div>
+    <div>
+      <div class="sectionTitle"><h2>قدّام يقترح عليك</h2><span>مبني على ملفك</span></div>
+      <div class="card op">
+        <div class="opHead"><div><span class="pill purple">موصى بها لك</span><h3>معسكر تحليل البيانات</h3></div><span class="fit">96% تطابق</span></div>
+        <p>يطوّر مهاراتك في Python وSQL ويضيف مشروعًا عمليًا لملفك.</p>
+        <div><span class="tag">تحليل بيانات</span> <span class="tag">عن بُعد</span> <span class="tag">مجاني</span></div>
+        <button class="btn primary full" onclick="openModal('معسكر تحليل البيانات','هذه بطاقة تجريبية لعرض كيف يربط قدّام بين ملف الطالب والفرصة المناسبة. في النسخة الفعلية يمكن فتح صفحة الجهة الرسمية والتقديم من خلالها.')">عرض التفاصيل</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="study" class="view">
+  <div class="sectionTitle"><h2>StudyFlow — رتّبي أسبوعك بذكاء</h2><span>الأسبوع الحالي</span></div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="opHead"><div><b>مؤشر ضغط الأسبوع</b><p style="color:var(--muted);font-size:12px">قدّام يعيد ترتيب الأولويات حسب الموعد والجهد.</p></div><span class="pill amber">متوسط</span></div>
+      <div class="progress"><i style="width:58%"></i></div>
+      <div class="task"><div class="check"></div><div class="txt"><b>مشروع قواعد البيانات</b><small>6 ساعات • موعده غدًا</small></div><span class="pill red">أولوية 1</span></div>
+      <div class="task"><div class="check"></div><div class="txt"><b>اختبار هياكل البيانات</b><small>4 ساعات • بعد 4 أيام</small></div><span class="pill amber">أولوية 2</span></div>
+      <div class="task"><div class="check"></div><div class="txt"><b>بحث مادة التقنيات الناشئة</b><small>3 ساعات • بعد أسبوع</small></div><span class="pill purple">أولوية 3</span></div>
+      <button class="btn primary full" onclick="showToast('تمت إعادة ترتيب الأسبوع حسب الأولوية والوقت المتاح')">إعادة توزيع الخطة تلقائيًا</button>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">تقسيم الوقت المقترح</h3>
+      <div class="grid g3">
+        <div class="card" style="padding:14px"><b>اليوم</b><div class="num" style="font-size:23px">2.5h</div><span style="color:var(--muted);font-size:11px">مشروع</span></div>
+        <div class="card" style="padding:14px"><b>غدًا</b><div class="num" style="font-size:23px">3h</div><span style="color:var(--muted);font-size:11px">مراجعة</span></div>
+        <div class="card" style="padding:14px"><b>السبت</b><div class="num" style="font-size:23px">1.5h</div><span style="color:var(--muted);font-size:11px">بحث</span></div>
+      </div>
+      <div class="sectionTitle"><h2>لماذا هذه الأولوية؟</h2></div>
+      <p style="color:var(--muted);line-height:1.9;font-size:13px">لأن موعد التسليم أقرب، وحجم المهمة أكبر، بينما ما زال لديك وقت محدود هذا الأسبوع. الهدف هو تقليل التراكم قبل أن يتحول إلى ضغط.</p>
+    </div>
+  </div>
+</section>
+
+<section id="opps" class="view">
+  <div class="sectionTitle"><h2>الفرص المناسبة لك</h2><span>8 نتائج مخصصة</span></div>
+  <div class="filters"><button class="filter active" onclick="filterOps('all',this)">الكل</button><button class="filter" onclick="filterOps('intern',this)">تدريب</button><button class="filter" onclick="filterOps('boot',this)">معسكرات</button><button class="filter" onclick="filterOps('comp',this)">مسابقات</button></div>
+  <div class="grid g3">
+    <div class="card op" data-type="boot"><div class="opHead"><h3>معسكر تحليل البيانات</h3><span class="fit">96%</span></div><p>تطابق قوي مع تخصصك واهتمامك بالبيانات.</p><div><span class="tag">معسكر</span><span class="tag">مجاني</span></div><button class="btn primary" onclick="openModal('معسكر تحليل البيانات','موصى به لأن ملفك يذكر Python وSQL واهتمامك بتحليل البيانات. في النسخة الفعلية: رابط الجهة الرسمية + موعد الإغلاق + المتطلبات.')">لماذا يناسبني؟</button></div>
+    <div class="card op" data-type="intern"><div class="opHead"><h3>تدريب تعاوني — محلل بيانات</h3><span class="fit">91%</span></div><p>فرصة تطبيقية مناسبة لمرحلتك الأكاديمية.</p><div><span class="tag">تدريب</span><span class="tag">الرياض</span></div><button class="btn primary" onclick="openModal('تدريب تعاوني — محلل بيانات','يطابق تخصصك، مستواك الحالي، والمهارات التي تريدين تطويرها.')">التفاصيل</button></div>
+    <div class="card op" data-type="comp"><div class="opHead"><h3>تحدي بيانات جامعي</h3><span class="fit">88%</span></div><p>مسابقة تضيف مشروعًا عمليًا إلى ملفك المهني.</p><div><span class="tag">مسابقة</span><span class="tag">فريق</span></div><button class="btn primary" onclick="openModal('تحدي بيانات جامعي','فرصة مناسبة لرفع الجاهزية المهنية وبناء دليل عملي على مهاراتك.')">التفاصيل</button></div>
+    <div class="card op" data-type="boot"><div class="opHead"><h3>شهادة SQL تطبيقية</h3><span class="fit">84%</span></div><p>خطوة قصيرة لسد فجوة مهارية في ملفك.</p><div><span class="tag">شهادة</span><span class="tag">عن بُعد</span></div><button class="btn primary" onclick="openModal('شهادة SQL تطبيقية','قدّام يقترحها كخطوة صغيرة ضمن خطة سد فجوة المهارات.')">التفاصيل</button></div>
+  </div>
+</section>
+
+<section id="mentor" class="view">
+  <div class="sectionTitle"><h2>المستشار الذكي — Career Mentor</h2><span>محادثة مبنية على ملفك</span></div>
+  <div class="card chat">
+    <div class="messages" id="messages">
+      <div class="bubble bot">أهلًا جُوانا. بناءً على تخصصك واهتمامك بتحليل البيانات، أقدر أساعدك في تحديد <b>خطوتك المهنية التالية</b> — مهارة، مشروع، فرصة أو تجهيز للوظيفة.</div>
+      <div class="bubble bot">مثلاً: إذا هدفك تدريب تعاوني خلال الأشهر القادمة، أقدر أبني لك خطة من 3 مراحل: سد فجوة المهارات → مشروع عملي → تجهيز ملف التقديم.</div>
+    </div>
+    <div class="typing" id="typing">المستشار يكتب…</div>
+    <div class="chatbar"><input id="chatInput" placeholder="اكتبي سؤالك مثل: وش أحتاج عشان أكون محللة بيانات؟"><button class="btn primary" onclick="sendMsg()">إرسال</button></div>
+  </div>
+</section>
+
+<section id="profile" class="view">
+  <div class="sectionTitle"><h2>ملفي — هذا هو السياق الذي يفهمه قدّام</h2><span>ملف الطالب</span></div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="profileRow"><div class="bigAvatar">ج</div><div><h2 style="margin:0">جُوانا</h2><p style="margin:4px 0;color:var(--muted)">طالبة • علم بيانات</p><span class="pill green">الملف مكتمل 86%</span></div></div>
+      <div class="sectionTitle"><h2>المهارات</h2></div>
+      <span class="skill">Python</span><span class="skill">SQL</span><span class="skill">Pandas</span><span class="skill">تحليل البيانات</span><span class="skill">MySQL</span>
+      <div class="sectionTitle"><h2>الاهتمامات</h2></div><p>تحليل البيانات • الذكاء الاصطناعي • المشاريع التطبيقية • التدريب التعاوني</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">رحلتك المقترحة</h3>
+      <div class="timeline">
+        <div class="step"><h4>1. الآن — سد فجوة SQL</h4><p>شهادة قصيرة + تمرين تطبيقي.</p></div>
+        <div class="step"><h4>2. التالي — مشروع بيانات</h4><p>مشروع منشور يثبت المهارة عمليًا.</p></div>
+        <div class="step"><h4>3. بعدها — تدريب تعاوني</h4><p>التقديم على فرص ذات تطابق مرتفع.</p></div>
+        <div class="step"><h4>4. على المدى الأبعد — وظيفة</h4><p>الانتقال إلى مسار محلل بيانات / BI.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<div class="modal" id="modal"><div class="modalBox"><div class="modalTop"><h2 id="modalTitle" style="margin:0"></h2><button class="close" onclick="closeModal()">×</button></div><p id="modalText" style="color:var(--muted);line-height:1.9"></p><button class="btn primary full" onclick="closeModal();showToast('تم حفظ الفرصة في خطتي')">أضفها لخطتي</button></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+function go(id,btn){
+ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+ if(btn) btn.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function openModal(t,x){document.getElementById('modalTitle').textContent=t;document.getElementById('modalText').textContent=x;document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function showToast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2400)}
+function filterOps(type,btn){
+ document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+ document.querySelectorAll('[data-type]').forEach(x=>x.style.display=(type==='all'||x.dataset.type===type)?'flex':'none');
+}
+function sendMsg(){
+ const inp=document.getElementById('chatInput'), val=inp.value.trim(); if(!val)return;
+ const box=document.getElementById('messages'), typ=document.getElementById('typing');
+ box.insertAdjacentHTML('beforeend',`<div class="bubble me">${val.replace(/</g,'&lt;')}</div>`); inp.value=''; box.scrollTop=box.scrollHeight; typ.style.display='block';
+ setTimeout(()=>{
+  typ.style.display='none';
+  let reply='بناءً على ملفك الحالي، أنصحك بخطوة عملية صغيرة أولًا: اختاري مهارة واحدة مرتبطة بهدفك، طبّقيها في مشروع قصير، ثم استخدمي المشروع كدليل عند التقديم على الفرص المناسبة.';
+  if(/بيانات|data|محلل|تحليل/.test(val)) reply='إذا كان هدفك تحليل البيانات، ركّزي الآن على SQL + Python/Pandas + مشروع بيانات منشور. بعدها يصبح التقديم على التدريب أكثر منطقية، وقدّام سيقترح الفرص الأعلى تطابقًا مع ملفك.';
+  if(/سيرة|cv|لينكد|linkedin/.test(val.toLowerCase())) reply='ابدئي بتحويل مهاراتك إلى أدلة: مشروعان أو ثلاثة، وصف واضح لدورك، نتائج قابلة للقياس، ثم رتّبي LinkedIn وCV حول المسار المستهدف بدل سرد كل ما تعلمته.';
+  box.insertAdjacentHTML('beforeend',`<div class="bubble bot">${reply}</div>`);box.scrollTop=box.scrollHeight;
+ },900);
+}
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg()});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+</script>
+</body>
+</html>
